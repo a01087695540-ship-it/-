@@ -147,6 +147,7 @@
             </div>
 
             <!-- 담당 업무 분야 -->
+            <!-- 담당 업무 분야 -->
             <div class="space-y-3">
                 <label class="block font-medium text-slate-800 text-sm sm:text-base">6. 귀하의 평소 주요 담당 업무 분야는 무엇인가요?</label>
                 <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -170,6 +171,14 @@
                         <input type="checkbox" name="jobTasks" value="영업/CS" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
                         <span class="text-slate-700 text-sm">영업 / CS</span>
                     </label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
+                        <input type="checkbox" name="jobTasks" id="otherJobCheck" value="기타" onchange="toggleOtherJobText(this)" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
+                        <span class="text-slate-700 text-sm">기타 (아래 입력)</span>
+                    </label>
+                </div>
+                <!-- 기타 텍스트 입력창 -->
+                <div id="otherJobTextInputContainer" class="hidden mt-2">
+                    <input type="text" id="jobTaskOtherText" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="직접 담당하고 계신 업무를 자유롭게 입력해 주세요.">
                 </div>
             </div>
 
@@ -290,6 +299,18 @@
             document.getElementById('levelValue').textContent = value;
         }
 
+        // 6. 기타 선택 시 텍스트 영역 토글 처리
+        function toggleOtherJobText(elem) {
+            const container = document.getElementById('otherJobTextInputContainer');
+            if (elem.checked) {
+                container.classList.remove('hidden');
+                document.getElementById('jobTaskOtherText').focus();
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('jobTaskOtherText').value = "";
+            }
+        }
+
         // 7. 기타 선택 시 텍스트 영역 토글 처리
         function toggleOtherText(elem) {
             const container = document.getElementById('otherTextInputContainer');
@@ -350,6 +371,14 @@
             document.querySelectorAll('input[name="autoWants"]:checked').forEach(el => autoWantsChecked.push(el.value));
 
             // 기타 체크 시 텍스트 조합
+            let jobTaskResult = jobTasksChecked.join(', ');
+            if (jobTasksChecked.includes('기타')) {
+                const otherVal = document.getElementById('jobTaskOtherText').value.trim();
+                if (otherVal) {
+                    jobTaskResult += ` (기타 상세: ${otherVal})`;
+                }
+            }
+
             let autoWantResult = autoWantsChecked.join(', ');
             if (autoWantsChecked.includes('기타')) {
                 const otherVal = document.getElementById('autoWantOtherText').value.trim();
@@ -373,7 +402,7 @@
                 "AI사용빈도": aiFreq,
                 "AI활용분야": aiUsageChecked.join(', '),
                 "AI활용수준": parseInt(aiLevel, 10),
-                "담당업무": jobTasksChecked.join(', '),
+                "담당업무": jobTaskResult,
                 "자동화희망작업": autoWantResult,
                 "소요시간": timeSpent,
                 "자동화상세": autoDetail,

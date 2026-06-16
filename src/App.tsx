@@ -35,6 +35,7 @@ export default function App() {
     aiUsage: [],
     aiLevel: 0,
     jobTasks: [],
+    jobTaskOtherText: "",
     autoWants: [],
     autoWantOtherText: "",
     timeSpent: "",
@@ -199,7 +200,10 @@ export default function App() {
       AI사용빈도: formData.aiFreq,
       AI활용분야: formData.aiUsage.join(", "),
       AI활용수준: formData.aiLevel,
-      담당업무: formData.jobTasks.join(", "),
+      담당업무: formData.jobTasks.join(", ") + 
+        (formData.jobTasks.includes("기타") && formData.jobTaskOtherText.trim() 
+          ? ` (기타 상세: ${formData.jobTaskOtherText.trim()})` 
+          : ""),
       자동화희망작업: formData.autoWants.join(", ") + 
         (formData.autoWants.includes("기타") && formData.autoWantOtherText.trim() 
           ? ` (기타 상세: ${formData.autoWantOtherText.trim()})` 
@@ -251,6 +255,7 @@ export default function App() {
       aiUsage: [],
       aiLevel: 0,
       jobTasks: [],
+      jobTaskOtherText: "",
       autoWants: [],
       autoWantOtherText: "",
       timeSpent: "",
@@ -641,6 +646,34 @@ export default function App() {
                       );
                     })}
                   </div>
+
+                  {/* 💡 "6번에 기타 누르면 글 쓸 수 있게 해줘" (Dynamic custom input for other fields) */}
+                  <AnimatePresence>
+                    {formData.jobTasks.includes("기타") && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden mt-2.5 pl-1"
+                      >
+                        <div className="bg-rose-50/40 border border-red-150 p-4 rounded-2xl space-y-2 mt-1">
+                          <label htmlFor="q6-other-input" className="block text-xs font-bold text-red-800 flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-[#C8102E]" />
+                            기타 항목 구체적 입력
+                          </label>
+                          <input
+                            id="q6-other-input"
+                            type="text"
+                            value={formData.jobTaskOtherText}
+                            onChange={(e) => handleTextChange("jobTaskOtherText", e.target.value)}
+                            placeholder="예: 가맹 영업 지원, 브랜드 기획 등 직접 입력"
+                            className="w-full text-xs sm:text-sm border border-slate-200 rounded-lg p-2.5 bg-white focus:outline-none focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E] transition-all"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   {errors.jobTasks && (
                     <span className="text-xs text-red-600 flex items-center gap-1 font-medium mt-1">
                       <AlertCircle className="w-3.5 h-3.5" /> 주요 담당 업무를 최소 하나 이상 선택해 주세요.
@@ -830,7 +863,7 @@ export default function App() {
                     {[
                       "실무에 바로 쓸 수 있는 툴 실습",
                       "AI 활용 아이디어 발굴",
-                      "팀 내 자동화 확산 방법",
+                      "개인 및 부서 업무 자동화 방법",
                       "기초 개념 이해",
                     ].map((exp) => {
                       const isSelected = formData.expectation === exp;

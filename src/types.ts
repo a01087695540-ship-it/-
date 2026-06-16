@@ -10,6 +10,7 @@ export interface SurveyData {
   aiUsage: string[];
   aiLevel: number;
   jobTasks: string[];
+  jobTaskOtherText: string;  // Detail if Q6 "기타" is selected
   autoWants: string[];
   autoWantOtherText: string; // Detail if Q7 "기타" is selected
   timeSpent: string;
