@@ -30,6 +30,7 @@ export default function App() {
   // Survey Form States
   const [formData, setFormData] = useState<SurveyData>({
     name: "",
+    companyIp: "",
     aiTools: [],
     aiFreq: "",
     aiUsage: [],
@@ -53,6 +54,7 @@ export default function App() {
   // Question blocks references to smooth scroll to the first invalid block
   const blockRefs = {
     name: useRef<HTMLDivElement>(null),
+    companyIp: useRef<HTMLDivElement>(null),
     aiTools: useRef<HTMLDivElement>(null),
     aiFreq: useRef<HTMLDivElement>(null),
     aiUsage: useRef<HTMLDivElement>(null),
@@ -160,6 +162,7 @@ export default function App() {
     const newErrors: Record<string, boolean> = {};
 
     if (!formData.name.trim()) newErrors.name = true;
+    if (!formData.companyIp.trim()) newErrors.companyIp = true;
     if (formData.aiTools.length === 0) newErrors.aiTools = true;
     if (!formData.aiFreq) newErrors.aiFreq = true;
     if (formData.aiUsage.length === 0) newErrors.aiUsage = true;
@@ -196,6 +199,7 @@ export default function App() {
 
     const payload = {
       이름: formData.name,
+      회사내부망IP: formData.companyIp,
       AI툴: formData.aiTools.join(", "),
       AI사용빈도: formData.aiFreq,
       AI활용분야: formData.aiUsage.join(", "),
@@ -301,6 +305,9 @@ export default function App() {
                 <div className="grid grid-cols-3 gap-y-1.5 text-slate-600">
                   <span className="font-medium text-slate-400">이름</span>
                   <span className="col-span-2 text-slate-800 font-semibold">{formData.name}</span>
+
+                  <span className="font-medium text-slate-400">내부망 IP</span>
+                  <span className="col-span-2 text-slate-800 font-semibold">{formData.companyIp}</span>
                   
                   <span className="font-medium text-slate-400">사용 중인 AI</span>
                   <span className="col-span-2 text-slate-800 truncate">{formData.aiTools.join(", ")}</span>
@@ -376,6 +383,35 @@ export default function App() {
                     </span>
                   )}
                 </div>
+
+                {/* Q2. 회사 내부망 IP 주소 */}
+                <div 
+                  ref={blockRefs.companyIp}
+                  className={`space-y-3 p-4 rounded-2xl transition-all ${
+                    errors.companyIp ? "bg-red-50/50 ring-1 ring-red-200" : ""
+                  }`}
+                >
+                  <label htmlFor="q2-ip-input" className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
+                    <span className="text-[#C8102E] font-bold">2.</span>
+                    회사 내부망 IP 주소를 입력해 주세요 <span className="text-[#C8102E] font-bold">*</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="q2-ip-input"
+                      type="text"
+                      value={formData.companyIp}
+                      onChange={(e) => handleTextChange("companyIp", e.target.value)}
+                      placeholder="예시) 10.12.00.00"
+                      className="w-full text-sm border border-slate-200 rounded-xl px-4 py-3 bg-white hover:border-[#C8102E] focus:outline-none focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E] transition-all"
+                    />
+                    {formData.companyIp.trim() && <Check className="absolute right-3.5 top-[#14px] w-4 h-4 text-emerald-500" />}
+                  </div>
+                  {errors.companyIp && (
+                    <span className="text-xs text-red-600 flex items-center gap-1 font-medium mt-1">
+                      <AlertCircle className="w-3.5 h-3.5" /> 내부망 IP 주소를 입력해 주세요 (예시: 10.12.00.00).
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* ────── SECTION 2. 생성형 AI 활용 수준 ────── */}
@@ -386,7 +422,7 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* Q2. 체크박스 그룹 */}
+                {/* Q3. 체크박스 그룹 */}
                 <div 
                   ref={blockRefs.aiTools}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -394,8 +430,8 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">2.</span>
-                    실제 업무에 사용하는 생성형 AI 툴을 선택해주세요 (중복 가능) <span className="text-[#C8102E] font-bold">*</span>
+                    <span className="text-[#C8102E] font-bold">3.</span>
+                    실제 업무에 사용하는 생성형 AI 툴을 선택해주세요 <span className="text-slate-400 font-normal text-xs">(중복 가능)</span> <span className="text-[#C8102E] font-bold">*</span>
                   </div>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -439,7 +475,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q3. 라디오 버튼 */}
+                {/* Q4. 라디오 버튼 */}
                 <div 
                   ref={blockRefs.aiFreq}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -447,7 +483,7 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">3.</span>
+                    <span className="text-[#C8102E] font-bold">4.</span>
                     생성형 AI를 얼마나 자주 사용하나요? <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
@@ -487,7 +523,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q4. 체크박스 그룹 */}
+                {/* Q5. 체크박스 그룹 */}
                 <div 
                   ref={blockRefs.aiUsage}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -495,8 +531,8 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">4.</span>
-                    생성형 AI를 어떤 업무에 활용하고 있나요? (중복 가능) <span className="text-[#C8102E] font-bold">*</span>
+                    <span className="text-[#C8102E] font-bold">5.</span>
+                    생성형 AI를 어떤 업무에 활용하고 있나요? <span className="text-slate-400 font-normal text-xs">(중복 가능)</span> <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -539,7 +575,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q5. 척도 (1-5 Level) */}
+                {/* Q6. 척도 (1-5 Level) */}
                 <div 
                   ref={blockRefs.aiLevel}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -547,7 +583,7 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">5.</span>
+                    <span className="text-[#C8102E] font-bold">6.</span>
                     나의 생성형 AI 활용 수준은 어느 정도입니까? <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
@@ -596,7 +632,7 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* Q6. 주요 담당 업무 */}
+                {/* Q7. 주요 담당 업무 */}
                 <div 
                   ref={blockRefs.jobTasks}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -604,8 +640,8 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">6.</span>
-                    주요 담당 업무를 선택해주세요 (중복 가능) <span className="text-[#C8102E] font-bold">*</span>
+                    <span className="text-[#C8102E] font-bold">7.</span>
+                    주요 담당 업무를 선택해주세요 <span className="text-slate-400 font-normal text-xs">(중복 가능)</span> <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-sans">
@@ -681,7 +717,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q7. 자동화 희망 및 "기타 "글 쓰기 기능 추가 */}
+                {/* Q8. 자동화 희망 및 "기타 "글 쓰기 기능 추가 */}
                 <div 
                   ref={blockRefs.autoWants}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -689,8 +725,8 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">7.</span>
-                    반복적으로 하는 업무 중 자동화하고 싶은 것은 무엇입니까? <span className="text-[#C8102E] font-bold">*</span>
+                    <span className="text-[#C8102E] font-bold">8.</span>
+                    반복적으로 하는 업무 중 자동화하고 싶은 것은 무엇입니까? <span className="text-slate-400 font-normal text-xs">(중복 가능)</span> <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -764,7 +800,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q8. 소요시간 */}
+                {/* Q9. 소요시간 */}
                 <div 
                   ref={blockRefs.timeSpent}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -772,7 +808,7 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">8.</span>
+                    <span className="text-[#C8102E] font-bold">9.</span>
                     해당 반복 업무에 하루 평균 얼마만큼의 시간을 사용하고 계신가요? <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
@@ -812,19 +848,19 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q9. 자동화 설명 (Textarea) */}
+                {/* Q10. 자동화 설명 (Textarea) */}
                 <div 
                   ref={blockRefs.autoDetail}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
                     errors.autoDetail ? "bg-red-50/50 ring-1 ring-red-200" : ""
                   }`}
                 >
-                  <label htmlFor="q9-input" className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">9.</span>
+                  <label htmlFor="q10-input" className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
+                    <span className="text-[#C8102E] font-bold">10.</span>
                     자동화하고 싶은 업무를 구체적으로 자유롭게 설명해주세요 <span className="text-[#C8102E] font-bold">*</span>
                   </label>
                   <textarea
-                    id="q9-input"
+                    id="q10-input"
                     value={formData.autoDetail}
                     onChange={(e) => handleTextChange("autoDetail", e.target.value)}
                     placeholder="예) 매주 월요일 각 가맹 매장 매출 현황을 엑셀로 기합해서 보고서로 만들어야 하는데, 복사 및 붙여넣기 수작업이 많아 1시간 이상 소요됩니다."
@@ -847,7 +883,7 @@ export default function App() {
                   </span>
                 </div>
 
-                {/* Q10. 교육 기대 사항 (라디오) */}
+                {/* Q11. 교육 기대 사항 (라디오) */}
                 <div 
                   ref={blockRefs.expectation}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -855,7 +891,7 @@ export default function App() {
                   }`}
                 >
                   <div className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">10.</span>
+                    <span className="text-[#C8102E] font-bold">11.</span>
                     이번 AX 교육에서 가장 기대하는 사항은 무엇입니까? <span className="text-[#C8102E] font-bold">*</span>
                   </div>
 
@@ -900,18 +936,18 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q11. 자유 의견 */}
+                {/* Q12. 자유 의견 */}
                 <div className="space-y-3 p-4">
-                  <label htmlFor="q11-input" className="block text-sm font-semibold text-slate-850 flex items-center gap-1.5 leading-relaxed">
-                    <span className="text-[#C8102E] font-bold">11.</span>
+                  <label htmlFor="q12-input" className="block text-sm font-semibold text-slate-850 flex items-center gap-1.5 leading-relaxed">
+                    <span className="text-[#C8102E] font-bold">12.</span>
                     자유 의견 <span className="text-slate-400 font-normal leading-relaxed">(선택)</span>
                   </label>
                   <textarea
-                    id="q11-input"
+                    id="q12-input"
                     value={formData.freeOpinion}
                     onChange={(e) => handleTextChange("freeOpinion", e.target.value)}
                     placeholder="교육에 바라는 점이나 하고 싶은 말씀이 있다면 자유롭게 입력해주세요."
-                    className="w-full text-xs sm:text-sm border border-slate-200 rounded-xl p-4 bg-white focus:outline-none focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E] transition-all min-h-[90px] resize-y leading-relaxed"
+                    className="w-full text-xs sm:text-sm border border-slate-200 rounded-xl p-4 bg-white focus:outline-[#C8102E] focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E] transition-all min-h-[90px] resize-y leading-relaxed"
                   />
                 </div>
 

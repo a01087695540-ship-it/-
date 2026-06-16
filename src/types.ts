@@ -5,6 +5,7 @@
 
 export interface SurveyData {
   name: string;
+  companyIp: string;
   aiTools: string[];
   aiFreq: string;
   aiUsage: string[];

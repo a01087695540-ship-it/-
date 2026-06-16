@@ -56,9 +56,17 @@
                        placeholder="이름을 입력해 주십시오">
             </div>
 
+            <!-- 회사 내부망 IP 주소 -->
+            <div class="space-y-2">
+                <label for="companyIp" class="block font-medium text-slate-800 text-sm sm:text-base">2. 회사 내부망 IP 주소를 입력해 주세요. <span class="text-red-500">*</span></label>
+                <input type="text" id="companyIp" name="companyIp" required
+                       class="w-full border border-slate-200 rounded-xl px-4 py-3 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                       placeholder="예시) 10.12.00.00">
+            </div>
+
             <!-- AI 툴 사용 경험 -->
             <div class="space-y-3">
-                <label class="block font-medium text-slate-800 text-sm sm:text-base">2. 지금까지 접하거나 업무에 활용해 본 AI 툴이 있다면 선택해 주세요. (중복 선택 가능)</label>
+                <label class="block font-medium text-slate-800 text-sm sm:text-base">3. 지금까지 접하거나 업무에 활용해 본 AI 툴이 있다면 선택해 주세요. <span class="text-slate-400 font-normal text-xs sm:text-sm">(중복 가능)</span></label>
                 <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
                         <input type="checkbox" name="aiTools" value="ChatGPT" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
@@ -85,7 +93,7 @@
 
             <!-- AI 사용 빈도 -->
             <div class="space-y-3">
-                <label class="block font-medium text-slate-800 text-sm sm:text-base">3. 업무에 AI를 얼마나 자주 활용하고 계신가요?</label>
+                <label class="block font-medium text-slate-800 text-sm sm:text-base">4. 업무에 AI를 얼마나 자주 활용하고 계신가요?</label>
                 <div class="space-y-2">
                     <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
                         <input type="radio" name="aiFreq" value="매일 여러 번 활용" class="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500">
@@ -108,7 +116,7 @@
 
             <!-- AI 활용 분야 -->
             <div class="space-y-3">
-                <label class="block font-medium text-slate-800 text-sm sm:text-base">4. 주로 어떤 비즈니스 업무 단계에서 AI 도움을 얻으시나요? (중복 선택 가능)</label>
+                <label class="block font-medium text-slate-800 text-sm sm:text-base">5. 주로 어떤 비즈니스 업무 단계에서 AI 도움을 얻으시나요? <span class="text-slate-400 font-normal text-xs sm:text-sm">(중복 가능)</span></label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
                         <input type="checkbox" name="aiUsage" value="기획 및 아이데이션" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
@@ -132,7 +140,7 @@
             <!-- AI 활용 수준 (슬라이더) -->
             <div class="space-y-3">
                 <label class="block font-medium text-slate-800 text-sm sm:text-base flex justify-between">
-                    <span>5. 본인이 생각하는 AI 활용 수준 등급 (0 ~ 100)</span>
+                    <span>6. 본인이 생각하는 AI 활용 수준 등급 (0 ~ 100)</span>
                     <span id="levelValue" class="text-blue-600 font-bold">50</span>
                 </label>
                 <div class="px-2">
@@ -147,9 +155,8 @@
             </div>
 
             <!-- 담당 업무 분야 -->
-            <!-- 담당 업무 분야 -->
             <div class="space-y-3">
-                <label class="block font-medium text-slate-800 text-sm sm:text-base">6. 귀하의 평소 주요 담당 업무 분야는 무엇인가요?</label>
+                <label class="block font-medium text-slate-800 text-sm sm:text-base">7. 귀하의 평소 주요 담당 업무 분야는 무엇인가요? <span class="text-slate-400 font-normal text-xs sm:text-sm">(중복 가능)</span></label>
                 <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
                         <input type="checkbox" name="jobTasks" value="개발/IT" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
@@ -184,7 +191,7 @@
 
             <!-- 자동화 희망 작업 -->
             <div class="space-y-3">
-                <label class="block font-medium text-slate-800 text-sm sm:text-base">7. 직무 내 자동화를 적용해보고 싶으신 업무가 있다면?</label>
+                <label class="block font-medium text-slate-800 text-sm sm:text-base">8. 직무 내 자동화를 적용해보고 싶으신 업무가 있다면? <span class="text-slate-400 font-normal text-xs sm:text-sm">(중복 가능)</span></label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition">
                         <input type="checkbox" name="autoWants" value="단순 반복 엑셀 처리" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
@@ -211,7 +218,7 @@
 
             <!-- 소요 시간 -->
             <div class="space-y-2">
-                <label for="timeSpent" class="block font-medium text-slate-800 text-sm sm:text-base">8. 해당 자동화 희망 업무에 일주일에 평균 몇 시간이 소요되나요?</label>
+                <label for="timeSpent" class="block font-medium text-slate-800 text-sm sm:text-base">9. 해당 자동화 희망 업무에 일주일에 평균 몇 시간이 소요되나요?</label>
                 <input type="text" id="timeSpent" name="timeSpent"
                        class="w-full border border-slate-200 rounded-xl px-4 py-3 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                        placeholder="예: 3시간, 10시간 이상 등 자유 기재">
@@ -219,7 +226,7 @@
 
             <!-- 자동화 상세 내용 -->
             <div class="space-y-2">
-                <label for="autoDetail" class="block font-medium text-slate-800 text-sm sm:text-base">9. 자동화가 필요한 내용과 흐름을 현실감있게 묘사해 주십시오.</label>
+                <label for="autoDetail" class="block font-medium text-slate-800 text-sm sm:text-base">10. 자동화가 필요한 내용과 흐름을 현실감있게 묘사해 주십시오.</label>
                 <textarea id="autoDetail" name="autoDetail" rows="3"
                           class="w-full border border-slate-200 rounded-xl px-4 py-3 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="어떤 자료나 파일을 어디에, 어떻게 변환하여 넣어야 하는지 수동 작업의 패턴을 상세히 적어주시면 솔루션 제작에 큰 도움이 됩니다."></textarea>
@@ -227,7 +234,7 @@
 
             <!-- 교육 기대사항 -->
             <div class="space-y-2">
-                <label for="expectation" class="block font-medium text-slate-800 text-sm sm:text-base">10. 이번 AX 부스터 실전 과정 교육에 기대하는 점은 무엇인가요?</label>
+                <label for="expectation" class="block font-medium text-slate-800 text-sm sm:text-base">11. 이번 AX 부스터 실전 과정 교육에 기대하는 점은 무엇인가요?</label>
                 <textarea id="expectation" name="expectation" rows="3"
                           class="w-full border border-slate-200 rounded-xl px-4 py-3 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="수강 후 달성하고 싶은 직무 혁신 목표나 관심 기술"></textarea>
@@ -235,7 +242,7 @@
 
             <!-- 자유 의견 -->
             <div class="space-y-2">
-                <label for="freeOpinion" class="block font-medium text-slate-800 text-sm sm:text-base">11. 추가 질문이나 건의 혹은 강사에게 전하고 싶으신 자유 의견이 있다면 적어주세요.</label>
+                <label for="freeOpinion" class="block font-medium text-slate-800 text-sm sm:text-base">12. 추가 질문이나 건의 혹은 강사에게 전하고 싶으신 자유 의견이 있다면 적어주세요.</label>
                 <textarea id="freeOpinion" name="freeOpinion" rows="2"
                           class="w-full border border-slate-200 rounded-xl px-4 py-3 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="강사에게 남기고 싶은 메시지나 의견을 들려주세요."></textarea>
@@ -338,6 +345,12 @@
                 return;
             }
 
+            const companyIp = document.getElementById('companyIp').value.trim();
+            if (!companyIp) {
+                alert('회사 내부망 IP 주소를 입력해 주세요!');
+                return;
+            }
+
             const scriptUrl = document.getElementById('scriptUrlInput').value.trim();
             if (!scriptUrl || !scriptUrl.startsWith('https://script.google.com')) {
                 alert('올바른 구글 웹앱 URL(https://script.google.com/macros/s/.../exec)이 명시되어 있어야 전송 가능합니다!');
@@ -408,6 +421,7 @@
                 "자동화상세": autoDetail,
                 "교육기대사항": expectation,
                 "자유의견": freeOpinion,
+                "회사내부망IP": companyIp,
                 "제출시각": new Date().toLocaleString("ko-KR")
             };
 
