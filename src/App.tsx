@@ -24,7 +24,7 @@ import { SurveyData, SubmissionRecord } from "./types";
 
 // ▼ 구글 스프레드시트 연동용 Google Apps Script Web App URL을 입력해주십시오.
 // 배포한 Web App URL 주소를 아래에 붙여넣으면 제출 시 자동으로 시트에 입력됩니다.
-const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw6RzhExw_ctKRrTWM44lewR4HLbfjqkqGYS4eQPQ_ddO5wK_HRZYECuISrBy8dA1nP2g/exec";
 
 export default function App() {
   // Survey Form States
@@ -225,7 +225,7 @@ export default function App() {
           method: "POST",
           mode: "no-cors",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/plain",
           },
           body: JSON.stringify(payload),
         });

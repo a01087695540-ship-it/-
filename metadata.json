@@ -1,6 +1,6 @@
 {
-  "name": "AX 부스터 과정 사전 설문조사",
-  "description": "롯데GRS 아카데미의 AX 부스터 과정 참여를 위한 사전 설문조사지입니다. 현업 자동화 니즈 및 생성형 AI 도구 활용 수준을 조사합니다.",
+  "name": "Lotte GRS Academy AX Booster Survey",
+  "description": "Survey application for Lotte GRS Academy AX Booster Course.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
