@@ -199,7 +199,7 @@ export default function App() {
 
     const payload = {
       이름: formData.name,
-      회사내부망IP: formData.companyIp,
+      EPID: formData.companyIp,
       AI툴: formData.aiTools.join(", "),
       AI사용빈도: formData.aiFreq,
       AI활용분야: formData.aiUsage.join(", "),
@@ -306,7 +306,7 @@ export default function App() {
                   <span className="font-medium text-slate-400">이름</span>
                   <span className="col-span-2 text-slate-800 font-semibold">{formData.name}</span>
 
-                  <span className="font-medium text-slate-400">내부망 IP</span>
+                  <span className="font-medium text-slate-400">EP ID</span>
                   <span className="col-span-2 text-slate-800 font-semibold">{formData.companyIp}</span>
                   
                   <span className="font-medium text-slate-400">사용 중인 AI</span>
@@ -384,7 +384,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Q2. 회사 내부망 IP 주소 */}
+                {/* Q2. EP ID 입력 */}
                 <div 
                   ref={blockRefs.companyIp}
                   className={`space-y-3 p-4 rounded-2xl transition-all ${
@@ -393,7 +393,7 @@ export default function App() {
                 >
                   <label htmlFor="q2-ip-input" className="block text-sm font-semibold text-slate-800 flex items-center gap-1.5 leading-relaxed">
                     <span className="text-[#C8102E] font-bold">2.</span>
-                    회사 내부망 IP 주소를 입력해 주세요 <span className="text-[#C8102E] font-bold">*</span>
+                    EP ID를 입력해주세요 <span className="text-[#C8102E] font-bold">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -401,14 +401,14 @@ export default function App() {
                       type="text"
                       value={formData.companyIp}
                       onChange={(e) => handleTextChange("companyIp", e.target.value)}
-                      placeholder="예시) 10.12.00.00"
+                      placeholder="예시)seungkook.park"
                       className="w-full text-sm border border-slate-200 rounded-xl px-4 py-3 bg-white hover:border-[#C8102E] focus:outline-none focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E] transition-all"
                     />
                     {formData.companyIp.trim() && <Check className="absolute right-3.5 top-[#14px] w-4 h-4 text-emerald-500" />}
                   </div>
                   {errors.companyIp && (
                     <span className="text-xs text-red-600 flex items-center gap-1 font-medium mt-1">
-                      <AlertCircle className="w-3.5 h-3.5" /> 내부망 IP 주소를 입력해 주세요 (예시: 10.12.00.00).
+                      <AlertCircle className="w-3.5 h-3.5" /> EP ID를 필수 입력해 주세요.
                     </span>
                   )}
                 </div>

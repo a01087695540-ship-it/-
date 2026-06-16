@@ -56,12 +56,12 @@
                        placeholder="이름을 입력해 주십시오">
             </div>
 
-            <!-- 회사 내부망 IP 주소 -->
+            <!-- EP ID 입력 -->
             <div class="space-y-2">
-                <label for="companyIp" class="block font-medium text-slate-800 text-sm sm:text-base">2. 회사 내부망 IP 주소를 입력해 주세요. <span class="text-red-500">*</span></label>
+                <label for="companyIp" class="block font-medium text-slate-800 text-sm sm:text-base">2. EP ID를 입력해주세요. <span class="text-red-500">*</span></label>
                 <input type="text" id="companyIp" name="companyIp" required
                        class="w-full border border-slate-200 rounded-xl px-4 py-3 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                       placeholder="예시) 10.12.00.00">
+                       placeholder="예시)seungkook.park">
             </div>
 
             <!-- AI 툴 사용 경험 -->
@@ -347,7 +347,7 @@
 
             const companyIp = document.getElementById('companyIp').value.trim();
             if (!companyIp) {
-                alert('회사 내부망 IP 주소를 입력해 주세요!');
+                alert('EP ID를 입력해 주세요!');
                 return;
             }
 
@@ -421,7 +421,7 @@
                 "자동화상세": autoDetail,
                 "교육기대사항": expectation,
                 "자유의견": freeOpinion,
-                "회사내부망IP": companyIp,
+                "EPID": companyIp,
                 "제출시각": new Date().toLocaleString("ko-KR")
             };
 

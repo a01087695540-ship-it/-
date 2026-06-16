@@ -47,7 +47,7 @@ function doPost(e) {
       var headers = [
         "제출 시각", 
         "이름", 
-        "회사 내부망 IP (Q2)",
+        "EP ID (Q2)",
         "AI 툴 (Q3)", 
         "AI 사용 빈도 (Q4)", 
         "AI 활용 분야 (Q5)", 
@@ -73,7 +73,7 @@ function doPost(e) {
     var rowData = [
       data["제출시각"] || new Date().toLocaleString("ko-KR"),
       data["이름"] || "",
-      data["회사내부망IP"] || "",
+      data["EPID"] || "",
       data["AI툴"] || "",
       data["AI사용빈도"] || "",
       data["AI활용분야"] || "",
